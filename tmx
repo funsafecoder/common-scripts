@@ -1,0 +1,13 @@
+#!/bin/bash
+
+names=$(tmux ls | sed 's/:.*//')
+for x in $names; do
+	if [[ $1 = $x ]]; then
+		exists=1
+	fi
+done
+if [[ $exists ]]; then
+	tmux a -t $1
+else
+	tmux new -s $1
+fi
